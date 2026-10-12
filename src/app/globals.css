@@ -12,7 +12,7 @@
   --accent-foreground: #030303;
   --accent-muted: rgba(0, 240, 164, 0.14);
   --accent-glow: rgba(0, 240, 164, 0.38);
-  /* Warm accent: “Interactive Demo” label */
+  /* Warm accent: product preview label */
   --warm-accent: #e3a45c;
   --warm-accent-dim: rgba(227, 164, 92, 0.85);
 }

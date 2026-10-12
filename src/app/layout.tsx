@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Boostlayer Technology — Built for the Future of Work",
+  title: "Boostlayer Technology — Software for Canadian Businesses",
   description:
-    "Boostlayer Technology builds payroll infrastructure for modern teams. Swift E-Roll — payroll, reimagined.",
+    "Boostlayer Technology builds software for Canadian businesses. Our first product is Invoice, an invoicing system with GST/HST, bilingual PDFs, and Interac.",
 };
 
 export default function RootLayout({
