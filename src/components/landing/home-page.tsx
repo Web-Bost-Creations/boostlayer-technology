@@ -1,9 +1,8 @@
+import Link from "next/link";
 import { ContactForm } from "./contact-form.client";
 import { HeroDashboardMock } from "./dashboard-mock";
 import { InteractiveDemoMock } from "./interactive-demo.client";
-import { LogoMark } from "./logo-mark";
 import { Reveal } from "./reveal-on-scroll.client";
-import { SiteNav } from "./site-nav.client";
 
 function Hero() {
   return (
@@ -18,27 +17,25 @@ function Hero() {
         }}
       />
       <div className="relative mx-auto flex max-w-6xl flex-col items-center text-center hero-animate-group">
-        <a
-          href="#product"
+        <Link
+          href="/platform"
           className="pill-idle mb-8 inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/25 bg-gradient-to-b from-[var(--accent-muted)] to-white/[0.02] px-3 py-1.5 text-sm text-zinc-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-colors duration-200 hover:border-[var(--accent)]/45 hover:text-white"
         >
           <span className="size-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_10px_var(--accent-glow)] ring-1 ring-[var(--accent)]/40" />
-          First product — an invoicing system for Canadian businesses
+          Invoice is live · More is coming
           <span aria-hidden>→</span>
-        </a>
+        </Link>
         <h1 className="max-w-4xl text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl">
-          We build software.{" "}
-          <span className="text-[var(--accent)]">Invoicing</span> is where we
-          start.
+          The <span className="text-[var(--accent)]">billing layer</span> for
+          modern Canadian business.
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-400 sm:text-xl">
-          Boostlayer Technology builds software for Canadian businesses. Our
-          first product is Invoice — GST and HST on the right line, a PDF your
-          client can pay, and a clear record of what you&apos;re owed.
+          We build tightly integrated business infrastructure. Invoice is live.
+          More is coming.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="#pricing"
+          <Link
+            href="/pricing"
             className="group inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[var(--accent-foreground)] shadow-[0_0_32px_var(--accent-glow)] transition-[filter,transform] duration-200 hover:brightness-110 active:scale-[0.98]"
           >
             Start invoicing
@@ -58,16 +55,16 @@ function Hero() {
                 strokeLinejoin="round"
               />
             </svg>
-          </a>
-          <a
-            href="#demo"
+          </Link>
+          <Link
+            href="/invoice#preview"
             className="inline-flex items-center gap-2 rounded-lg border border-[var(--accent)]/35 bg-zinc-900/50 px-6 py-3 text-sm font-medium text-white transition-colors duration-200 hover:border-[var(--accent)]/55 hover:bg-[var(--accent-muted)]"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
               <path d="M8 5v14l11-7L8 5z" />
             </svg>
             Try Invoice
-          </a>
+          </Link>
         </div>
         <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-500">
           {[
@@ -156,20 +153,20 @@ const productFeatures = [
   },
 ];
 
-function Product() {
+export function Product() {
   return (
     <Reveal>
-      <section id="product" className="scroll-mt-24 px-4 py-20 sm:px-6">
+      <section className="px-4 py-20 sm:px-6">
         <div className="mx-auto max-w-6xl">
-          <p className="text-sm font-medium text-[var(--accent)]">The product</p>
-          <h2 className="mt-2 max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Invoice — the first product{" "}
-            <span className="text-[var(--accent)]">we shipped.</span>
-          </h2>
+          <p className="text-sm font-medium text-[var(--accent)]">Live now</p>
+          <h1 className="mt-2 max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            Invoice is the billing layer{" "}
+            <span className="text-[var(--accent)]">you can use today.</span>
+          </h1>
           <p className="mt-4 max-w-2xl text-[var(--muted)]">
-            We build software for Canadian businesses. Invoice is the one you
-            can use today: create the bill, apply the tax, send it, and see
-            when it is paid.
+            Create the bill, apply the tax, send it, and see when it is paid.
+            Clients, tax, and balances stay on Boostlayer, ready for the tools
+            that follow.
           </p>
           <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {productFeatures.map((feature) => (
@@ -190,19 +187,106 @@ function Product() {
             ))}
           </div>
           <div className="mt-10 text-center">
-            <a
-              href="#features"
+            <Link
+              href="/platform"
               className="group inline-flex items-center gap-1.5 text-sm font-medium text-[var(--accent)] transition-opacity hover:opacity-90"
             >
-              See what Invoice handles
+              See what&apos;s next
               <span
                 aria-hidden
                 className="transition-transform duration-200 group-hover:translate-x-0.5"
               >
                 →
               </span>
-            </a>
+            </Link>
           </div>
+        </div>
+      </section>
+    </Reveal>
+  );
+}
+
+const roadmap = [
+  {
+    name: "Invoice",
+    status: "Live",
+    body: "Billing, tax, and a record of what you're owed.",
+    href: "/invoice",
+    live: true,
+  },
+  {
+    name: "Payments",
+    status: "Coming Q1",
+    body: "Money in and out, tied to the invoice that caused it.",
+    href: "/payments",
+    live: false,
+  },
+  {
+    name: "Inventory",
+    status: "Planned",
+    body: "Stock that moves when a bill goes out.",
+    href: "/inventory",
+    live: false,
+  },
+  {
+    name: "Payroll",
+    status: "Future",
+    body: "Pay runs on the same books as the revenue you billed.",
+    href: "/payroll",
+    live: false,
+  },
+] as const;
+
+export function Roadmap({ page = false }: { page?: boolean }) {
+  const Title = page ? "h1" : "h2";
+
+  return (
+    <Reveal>
+      <section className="px-4 py-20 sm:px-6">
+        <div className="mx-auto max-w-6xl">
+          <p className="text-sm font-medium tracking-wide text-[#e3a45c]">
+            Next up
+          </p>
+          <Title className="mt-2 max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            One infrastructure.{" "}
+            <span className="text-[var(--accent)]">More tools on it.</span>
+          </Title>
+          <p className="mt-4 max-w-2xl text-[var(--muted)]">
+            Boostlayer is a technology company building an ecosystem of
+            business tools. Invoice is the billing layer that is live.
+            Payments, inventory, and payroll will share the same clients, tax,
+            and balances.
+          </p>
+          <ol className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {roadmap.map((item) => (
+              <li key={item.name}>
+                <Link
+                  href={item.href}
+                  className={`flex h-full flex-col rounded-2xl border p-5 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 ${
+                    item.live
+                      ? "border-[var(--accent)]/35 bg-[#0d1512] hover:border-[var(--accent)]/55"
+                      : "border-white/[0.06] bg-[#111] hover:border-white/15"
+                  }`}
+                >
+                  <p
+                    className={`font-mono text-xs ${
+                      item.live
+                        ? "text-[var(--accent)]"
+                        : item.status === "Coming Q1"
+                          ? "text-[#e3a45c]"
+                          : "text-zinc-500"
+                    }`}
+                  >
+                    {item.status}
+                  </p>
+                  <h3 className="mt-3 font-semibold text-white">{item.name}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+                    {item.body}
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
     </Reveal>
@@ -242,7 +326,7 @@ const featureCards = [
   },
 ];
 
-function Features() {
+export function Features() {
   return (
     <Reveal>
       <section id="features" className="scroll-mt-24 px-4 py-20 sm:px-6">
@@ -254,8 +338,8 @@ function Features() {
               <span className="text-[var(--accent)]">can pay.</span>
             </h2>
             <p className="mt-4 text-[var(--muted)]">
-              Spreadsheets and Word templates get the number out. Invoice keeps
-              the tax, the status, and the payment on the same record.
+              Invoice keeps the tax, the status, and the payment on one record —
+              the same record the rest of the platform will use.
             </p>
             <ul className="mt-8 space-y-3">
               {featureBullets.map((item) => (
@@ -285,10 +369,10 @@ function Features() {
   );
 }
 
-function Demo() {
+export function Demo() {
   return (
     <Reveal>
-      <section id="demo" className="scroll-mt-24 px-4 py-20 sm:px-6">
+      <section id="preview" className="scroll-mt-24 px-4 py-20 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <p className="text-sm font-medium tracking-wide text-[#e3a45c]">
             Invoice
@@ -336,7 +420,7 @@ const steps = [
   },
 ];
 
-function HowItWorks() {
+export function HowItWorks() {
   return (
     <Reveal>
       <section id="process" className="scroll-mt-24 border-t border-white/[0.06] px-4 py-20 sm:px-6">
@@ -392,7 +476,7 @@ const quotes = [
   },
 ];
 
-function Testimonials() {
+export function Testimonials() {
   return (
     <Reveal>
       <section className="px-4 py-20 sm:px-6">
@@ -442,6 +526,7 @@ const plans = [
       "Email support",
     ],
     cta: "Create a free account",
+    href: "/sign-in",
     popular: false,
   },
   {
@@ -458,6 +543,7 @@ const plans = [
       "Estimates",
     ],
     cta: "Start Growth",
+    href: "/contact",
     popular: true,
   },
   {
@@ -474,20 +560,21 @@ const plans = [
       "Priority support",
     ],
     cta: "Talk to us",
+    href: "/contact",
     popular: false,
   },
 ];
 
-function Pricing() {
+export function Pricing() {
   return (
     <Reveal>
-      <section id="pricing" className="scroll-mt-24 px-4 py-20 sm:px-6">
+      <section className="px-4 py-20 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <p className="text-sm font-medium text-[var(--accent)]">Pricing</p>
-          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          <h1 className="mt-2 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             Simple pricing.{" "}
             <span className="text-[var(--accent)]">In Canadian dollars.</span>
-          </h2>
+          </h1>
           <p className="mt-4 text-[var(--muted)]">
             Start free. Move up when you are sending more than a handful of
             invoices a month.
@@ -521,8 +608,8 @@ function Pricing() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href="#contact"
+                <Link
+                  href={plan.href}
                   className={`mt-8 inline-flex w-full items-center justify-center rounded-lg py-3 text-sm font-semibold transition-[filter,colors] duration-200 ${
                     plan.popular
                       ? "bg-[var(--accent)] text-[var(--accent-foreground)] shadow-[0_0_20px_var(--accent-glow)] hover:brightness-110"
@@ -530,7 +617,7 @@ function Pricing() {
                   }`}
                 >
                   {plan.cta}
-                </a>
+                </Link>
               </article>
             ))}
           </div>
@@ -540,7 +627,7 @@ function Pricing() {
   );
 }
 
-function MidCta() {
+export function MidCta() {
   return (
     <Reveal>
       <section className="px-4 py-16 sm:px-6">
@@ -550,22 +637,22 @@ function MidCta() {
             <span className="text-[var(--accent)]">that gets paid?</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-[var(--muted)]">
-            Invoice is the first product from Boostlayer. More software is
-            coming. This one is ready for the bills you send this month.
+            Invoice is live. Payments, inventory, and payroll are next, on the
+            same infrastructure.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a
-              href="#pricing"
+            <Link
+              href="/pricing"
               className="rounded-lg bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[var(--accent-foreground)] shadow-[0_0_24px_var(--accent-glow)] transition-[filter,transform] duration-200 hover:brightness-110 active:scale-[0.98]"
             >
               Start free
-            </a>
-            <a
-              href="#contact"
+            </Link>
+            <Link
+              href="/platform"
               className="rounded-lg border border-[var(--accent)]/35 px-6 py-3 text-sm font-medium text-white transition-colors duration-200 hover:border-[var(--accent)]/55 hover:bg-[var(--accent-muted)]"
             >
-              Request a walkthrough
-            </a>
+              See the roadmap
+            </Link>
           </div>
           <p className="mt-6 text-sm text-zinc-500">
             Free to start · Priced in CAD · Hosted in Canada
@@ -576,17 +663,17 @@ function MidCta() {
   );
 }
 
-function Contact() {
+export function Contact() {
   return (
     <Reveal>
-      <section id="contact" className="scroll-mt-24 px-4 py-20 sm:px-6">
+      <section className="px-4 py-20 sm:px-6">
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
           <div>
             <p className="text-sm font-medium text-[var(--accent)]">Contact</p>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            <h1 className="mt-2 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
               Tell us how you{" "}
               <span className="text-[var(--accent)]">invoice today.</span>
-            </h2>
+            </h1>
             <p className="mt-4 text-[var(--muted)]">
               A few details are enough. We&apos;ll reply with a walkthrough of
               Invoice and whether it fits the way you bill.
@@ -611,117 +698,13 @@ function Contact() {
   );
 }
 
-function Footer() {
-  const cols = [
-    {
-      title: "Product",
-      links: [
-        ["Invoice", "#product"],
-        ["Features", "#features"],
-        ["Live preview", "#demo"],
-        ["Pricing", "#pricing"],
-        ["How it works", "#process"],
-      ],
-    },
-    {
-      title: "Company",
-      links: [
-        ["About Boostlayer", "#"],
-        ["Journal", "#"],
-        ["Careers", "#"],
-        ["Press", "#"],
-        ["Contact", "#contact"],
-      ],
-    },
-    {
-      title: "Legal",
-      links: [
-        ["Privacy", "#"],
-        ["Terms", "#"],
-        ["Security", "#"],
-        ["PIPEDA", "#"],
-      ],
-    },
-    {
-      title: "Invoice",
-      links: [
-        ["Taxes", "#features"],
-        ["Interac", "#features"],
-        ["Bilingual PDFs", "#features"],
-        ["Status", "#"],
-      ],
-    },
-  ];
-
-  return (
-    <footer className="border-t border-white/[0.06] px-4 py-16 sm:px-6">
-      <div className="mx-auto max-w-6xl">
-        <div className="flex flex-wrap items-center justify-between gap-6 border-b border-white/[0.06] pb-10">
-          <div className="flex items-center gap-2">
-            <LogoMark />
-            <span className="font-semibold text-white">Boostlayer</span>
-          </div>
-          <div className="flex gap-4 text-zinc-500">
-            <a href="#" className="transition-colors hover:text-[var(--accent)]" aria-label="X">
-              𝕏
-            </a>
-            <a href="#" className="transition-colors hover:text-[var(--accent)]" aria-label="LinkedIn">
-              in
-            </a>
-            <a href="#" className="transition-colors hover:text-[var(--accent)]" aria-label="GitHub">
-              gh
-            </a>
-          </div>
-        </div>
-        <div className="grid gap-10 pt-10 sm:grid-cols-2 lg:grid-cols-4">
-          {cols.map((column) => (
-            <div key={column.title}>
-              <p className="text-sm font-semibold text-white">{column.title}</p>
-              <ul className="mt-4 space-y-2">
-                {column.links.map(([label, href]) => (
-                  <li key={label}>
-                    <a
-                      href={href}
-                      className="text-sm text-[var(--muted)] transition-colors duration-200 hover:text-[var(--accent)]"
-                    >
-                      {label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <p className="mt-12 max-w-md text-sm text-[var(--muted)]">
-          We build software for Canadian businesses. Invoice is the first
-          product.
-        </p>
-        <div className="mt-10 flex flex-col gap-2 border-t border-white/[0.06] pt-8 text-sm text-[var(--muted)] sm:flex-row sm:justify-between">
-          <span>© 2026 Boostlayer Technology Inc. All rights reserved.</span>
-          <span>Built in Canada</span>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 export function HomePage() {
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
-      <SiteNav />
-      <main>
-        <Hero />
-        <Logos />
-        <Product />
-        <Features />
-        <Demo />
-        <HowItWorks />
-        <Testimonials />
-        <Pricing />
-        <MidCta />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <Hero />
+      <Logos />
+      <Roadmap />
+      <MidCta />
+    </>
   );
 }
