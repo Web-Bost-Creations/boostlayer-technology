@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { onSessionChange, readSession } from "@/lib/session";
 import { LogoMark } from "./logo-mark";
 
 const products = [
@@ -44,12 +45,25 @@ export function SiteNav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const productsRef = useRef<HTMLDivElement>(null);
-  const productsActive = products.some((product) => product.href === pathname);
+  const productsActive = products.some(
+    (product) =>
+      pathname === product.href || pathname.startsWith(`${product.href}/`),
+  );
+
+  const [signedIn, setSignedIn] = useState(false);
+  const accountHref = signedIn ? "/account" : "/sign-in";
+  const accountLabel = signedIn ? "Account" : "Sign In";
 
   useEffect(() => {
     setMenuOpen(false);
     setProductsOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const sync = () => setSignedIn(Boolean(readSession()));
+    sync();
+    return onSessionChange(sync);
+  }, []);
 
   useEffect(() => {
     function onPointer(event: MouseEvent) {
@@ -113,7 +127,10 @@ export function SiteNav() {
                       href={product.href}
                       onClick={closeAll}
                       className={`flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors hover:bg-white/[0.05] hover:text-white ${
-                        pathname === product.href ? "text-white" : "text-zinc-300"
+                        pathname === product.href ||
+                        pathname.startsWith(`${product.href}/`)
+                          ? "text-white"
+                          : "text-zinc-300"
                       }`}
                     >
                       <span className="font-medium">{product.name}</span>
@@ -145,12 +162,12 @@ export function SiteNav() {
         </nav>
         <div className="flex shrink-0 items-center justify-end gap-2.5">
           <Link
-            href="/sign-in"
+            href={accountHref}
             className={`hidden h-9 items-center rounded-full border bg-white/[0.04] px-4 text-sm font-medium text-white transition-colors duration-200 hover:border-white/30 hover:bg-white/[0.08] sm:inline-flex ${
-              pathname === "/sign-in" ? "border-white/30" : "border-white/15"
+              pathname === accountHref ? "border-white/30" : "border-white/15"
             }`}
           >
-            Sign In
+            {accountLabel}
           </Link>
           <Link
             href="/pricing"
@@ -184,7 +201,10 @@ export function SiteNav() {
                 href={product.href}
                 onClick={closeAll}
                 className={`flex items-center justify-between rounded-lg px-2 py-2.5 text-sm transition-colors hover:bg-white/[0.04] hover:text-white ${
-                  pathname === product.href ? "text-white" : "text-zinc-300"
+                  pathname === product.href ||
+                  pathname.startsWith(`${product.href}/`)
+                    ? "text-white"
+                    : "text-zinc-300"
                 }`}
               >
                 <span>{product.name}</span>
@@ -213,11 +233,11 @@ export function SiteNav() {
               </Link>
             ))}
             <Link
-              href="/sign-in"
+              href={accountHref}
               onClick={closeAll}
               className="mt-2 rounded-full border border-white/15 bg-white/[0.04] px-3 py-2.5 text-center text-sm font-medium text-white sm:hidden"
             >
-              Sign In
+              {accountLabel}
             </Link>
           </div>
         </nav>

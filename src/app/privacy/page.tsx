@@ -15,8 +15,11 @@ export default function PrivacyPage() {
         and message so we can reply and keep a record of your business.
       </p>
       <p>
-        Sign-in saves the email address you enter, and whether we already have
-        that person on file. The password stays in your browser.
+        An Invoice account saves your name, work email, company, and a hash of
+        your password. The password itself is not stored. Growth and Business
+        are charged by Stripe on the account page before Invoice opens. We
+        store the plan, the amount in Canadian dollars, the Stripe payment id,
+        and the Invoice key. We do not store the card number.
       </p>
       <p>
         Customer, client, and invoice records live in the Boostlayer database,

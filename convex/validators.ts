@@ -36,9 +36,39 @@ export const invoiceStatus = v.union(
 
 export const language = v.union(v.literal("en"), v.literal("fr"));
 
+export const province = v.union(
+  v.literal("AB"),
+  v.literal("BC"),
+  v.literal("MB"),
+  v.literal("NB"),
+  v.literal("NL"),
+  v.literal("NS"),
+  v.literal("NT"),
+  v.literal("NU"),
+  v.literal("ON"),
+  v.literal("PE"),
+  v.literal("QC"),
+  v.literal("SK"),
+  v.literal("YT"),
+);
+
+export const purchaseReason = v.union(
+  v.literal("checkout"),
+  v.literal("upgrade"),
+  v.literal("downgrade"),
+);
+
+export const productPlan = v.union(
+  v.literal("starter"),
+  v.literal("growth"),
+  v.literal("business"),
+);
+
 export const activityKind = v.union(
   v.literal("lead_submitted"),
   v.literal("sign_in"),
   v.literal("client_added"),
   v.literal("invoice_recorded"),
+  v.literal("account_created"),
+  v.literal("plan_purchased"),
 );

@@ -8,6 +8,8 @@ import {
   leadStatus,
   need,
   plan,
+  productPlan,
+  purchaseReason,
 } from "./validators";
 
 export default defineSchema({
@@ -116,4 +118,50 @@ export default defineSchema({
     invoiceId: v.optional(v.id("invoices")),
     createdAt: v.number(),
   }).index("by_customer_and_created", ["customerId", "createdAt"]),
+
+  accounts: defineTable({
+    email: v.string(),
+    passwordHash: v.string(),
+    passwordSalt: v.string(),
+    personId: v.id("people"),
+    customerId: v.id("customers"),
+    pendingPlan: productPlan,
+    stripeCustomerId: v.optional(v.string()),
+    stripeSubscriptionId: v.optional(v.string()),
+    createdAt: v.number(),
+  })
+    .index("by_email", ["email"])
+    .index("by_created", ["createdAt"]),
+
+  sessions: defineTable({
+    tokenHash: v.string(),
+    accountId: v.id("accounts"),
+    createdAt: v.number(),
+    expiresAt: v.number(),
+  }).index("by_token", ["tokenHash"]),
+
+  purchases: defineTable({
+    accountId: v.id("accounts"),
+    customerId: v.id("customers"),
+    product: v.literal("invoice"),
+    plan: productPlan,
+    amountCents: v.number(),
+    currency: v.literal("CAD"),
+    stripeSessionId: v.optional(v.string()),
+    reason: v.optional(purchaseReason),
+    createdAt: v.number(),
+  })
+    .index("by_account", ["accountId"])
+    .index("by_stripe", ["stripeSessionId"]),
+
+  licenseKeys: defineTable({
+    accountId: v.id("accounts"),
+    customerId: v.id("customers"),
+    product: v.literal("invoice"),
+    plan: productPlan,
+    key: v.string(),
+    createdAt: v.number(),
+  })
+    .index("by_account", ["accountId"])
+    .index("by_key", ["key"]),
 });

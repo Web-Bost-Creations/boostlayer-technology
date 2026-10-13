@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ContactForm } from "./contact-form.client";
 import { HeroDashboardMock } from "./dashboard-mock";
 import { InteractiveDemoMock } from "./interactive-demo.client";
+import { invoicePlans } from "./invoice-plans";
 import { Reveal } from "./reveal-on-scroll.client";
 
 function Hero() {
@@ -35,7 +36,7 @@ function Hero() {
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Link
-            href="/pricing"
+            href="/invoice/pricing"
             className="group inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[var(--accent-foreground)] shadow-[0_0_32px_var(--accent-glow)] transition-[filter,transform] duration-200 hover:brightness-110 active:scale-[0.98]"
           >
             Start invoicing
@@ -511,76 +512,23 @@ export function Testimonials() {
   );
 }
 
-const plans = [
-  {
-    name: "Starter",
-    price: "CAD $0",
-    period: "",
-    desc: "For a business sending its first invoices out of a template.",
-    features: [
-      "5 invoices a month",
-      "GST / HST on each invoice",
-      "PDF invoices",
-      "Client list",
-      "Payment status",
-      "Email support",
-    ],
-    cta: "Create a free account",
-    href: "/sign-in",
-    popular: false,
-  },
-  {
-    name: "Growth",
-    price: "CAD $39",
-    period: "/month",
-    desc: "For a company that bills every week and wants to get paid from the invoice.",
-    features: [
-      "Unlimited invoices",
-      "Recurring invoices",
-      "Interac e-Transfer requests",
-      "Overdue reminders",
-      "English and French PDFs",
-      "Estimates",
-    ],
-    cta: "Start Growth",
-    href: "/contact",
-    popular: true,
-  },
-  {
-    name: "Business",
-    price: "CAD $99",
-    period: "/month",
-    desc: "For a team that needs more than one person on the books.",
-    features: [
-      "Everything in Growth",
-      "Multiple team members",
-      "Deposits and partial payments",
-      "Tax summaries by province",
-      "Bookkeeper export",
-      "Priority support",
-    ],
-    cta: "Talk to us",
-    href: "/contact",
-    popular: false,
-  },
-];
-
 export function Pricing() {
   return (
     <Reveal>
       <section className="px-4 py-20 sm:px-6">
         <div className="mx-auto max-w-6xl">
-          <p className="text-sm font-medium text-[var(--accent)]">Pricing</p>
+          <p className="text-sm font-medium text-[var(--accent)]">Invoice</p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Simple pricing.{" "}
+            Pricing for Invoice.{" "}
             <span className="text-[var(--accent)]">In Canadian dollars.</span>
           </h1>
-          <p className="mt-4 text-[var(--muted)]">
-            Start free. Move up when you are sending more than a handful of
+          <p className="mt-4 max-w-2xl text-[var(--muted)]">
+            These plans are for Invoice, the billing product. Start free, then
+            move to Growth or Business when you send more than a handful of
             invoices a month.
           </p>
           <div className="mt-14 grid gap-4 lg:grid-cols-3">
-            {plans.map((plan) => (
+            {invoicePlans.map((plan) => (
               <article
                 key={plan.name}
                 className={`relative flex flex-col rounded-2xl border p-6 transition-[border-color,transform,box-shadow] duration-200 ${
@@ -642,7 +590,7 @@ export function MidCta() {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
-              href="/pricing"
+              href="/invoice/pricing"
               className="rounded-lg bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[var(--accent-foreground)] shadow-[0_0_24px_var(--accent-glow)] transition-[filter,transform] duration-200 hover:brightness-110 active:scale-[0.98]"
             >
               Start free

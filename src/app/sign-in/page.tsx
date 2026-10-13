@@ -17,12 +17,12 @@ export default function SignInPage() {
             Sign in to Invoice.
           </h1>
           <p className="mt-4 max-w-md text-[var(--muted)]">
-            The billing layer for your Canadian business. New here? Pick a plan,
-            or ask for a walkthrough and we&apos;ll set the account up with you.
+            The billing layer for your Canadian business. New here? Choose a plan,
+            create an account, and Invoice opens on the link for that tier.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href="/pricing"
+              href="/invoice/pricing"
               className="rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--accent-foreground)]"
             >
               See pricing
